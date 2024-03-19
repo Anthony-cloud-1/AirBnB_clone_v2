@@ -21,15 +21,15 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        var = models.storage.all()
-        lista = []
-        result = []
-        for key in var:
+        vars = models.storage.all()
+        list_a = []
+        res = []
+        for key in vars:
             city = key.replace('.', ' ')
             city = shlex.split(city)
             if (city[0] == 'City'):
-                lista.append(var[key])
-        for elem in lista:
-            if (elem.state_id == self.id):
-                result.append(elem)
-        return (result)
+                list_a.append(vars[key])
+        for element in list_a:
+            if (element.state_id == self.id):
+                res.append(element)
+        return (res)
