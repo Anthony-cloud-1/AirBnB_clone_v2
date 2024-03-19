@@ -29,11 +29,11 @@ class BaseModel:
             updated_at: updated date
         """
         if kwargs:
-            for key, value in kwargs.items():
+            for key, val in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    val = datetime.strptime(val, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
-                    setattr(self, key, value)
+                    setattr(self, key, val)
             if "id" not in kwargs:
                 self.id = str(uuid.uuid4())
             if "created_at" not in kwargs:
@@ -69,13 +69,13 @@ class BaseModel:
         Return:
             returns a dictionary of all the key values in __dict__
         """
-        my_dict = dict(self.__dict__)
-        my_dict["__class__"] = str(type(self).__name__)
-        my_dict["created_at"] = self.created_at.isoformat()
-        my_dict["updated_at"] = self.updated_at.isoformat()
-        if '_sa_instance_state' in my_dict.keys():
-            del my_dict['_sa_instance_state']
-        return my_dict
+        _dict = dict(self.__dict__)
+        _dict["__class__"] = str(type(self).__name__)
+        _dict["created_at"] = self.created_at.isoformat()
+        _dict["updated_at"] = self.updated_at.isoformat()
+        if '_sa_instance_state' in _dict.keys():
+            del _dict['_sa_instance_state']
+        return _dict
 
     def delete(self):
         """ delete object
